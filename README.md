@@ -10,8 +10,8 @@ smart-garage/
 │   ├── iot_final.ino               # Main Arduino sketch for ESP32
 │   ├── PinDefinitionsAndMore.h     # Pin definitions and helper functions
 ├── raspi_clients/
-│   ├── client_pub.py               # MQTT Publisher (Ultrasonic sensor)
-│   ├── client_sub.py               # MQTT Subscriber (Garage door control)
+│   ├── client_pub.py               # MQTT Publisher (Garage door control)
+│   ├── client_sub.py               # MQTT Subscriber (Ultrasonic sensor)
 ├── plate_model/
 │   ├── # TODO
 ├── README.md                       # Documentation
@@ -69,7 +69,7 @@ python raspi_clients/client_sub.py
 
 3. Monitor and control the garage door via MQTT topics:
 
-    - Publish to ultrasonic/detection to simulate vehicle detection.
-    - Subscribe to garage/open_garage to control the garage door.
+    - Subscribe to ultrasonic/detection to simulate vehicle detection.
+    - Publish to garage/open_garage to control the garage door.
 
 4. Open the Streamlit dashboard for monitoring (future integration).
