@@ -61,6 +61,8 @@ python raspi_clients/client_sub.py
 
 ### Usage
 
+![Diagramas(1)](https://github.com/user-attachments/assets/f4a617de-56ce-4d62-abf9-58d418862c58)
+
 1. Start the ESP32 with the uploaded iot_final.ino sketch.
 
 2. Ensure the Raspberry Pi is running both client_pub.py and client_sub.py.
