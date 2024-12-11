@@ -2,3 +2,5 @@ __pycache__/
 plate_model/*/*.weights
 plate_model/*/*.cfg
 plate_model/*/*.data
+
+*.csv
