@@ -6,10 +6,10 @@ pipeline = "FullPlate"
 # Command to run the script
 if pipeline == "FullPlate":
     script_path = "darknet_video_full_detect.py"
-    args = ["--gpu_index", "0", "--config_file", "./FullPlates/AntigoPlates_test3.cfg", "--weights", "./FullPlates/AntigoPlates_test3_30000.weights", "--data_file", "./FullPlates/AntigoPlates_test3.data"]
+    args = ["--gpu_index", "0", "--config_file", "./plate_model/FullPlates/AntigoPlates_test3.cfg", "--weights", "./plate_model/FullPlates/AntigoPlates_test3_30000.weights", "--data_file", "./plate_model/FullPlates/AntigoPlates_test3.data"]
 elif pipeline == "OCR":
     script_path = "darknet_video_ocr.py"
-    args = ["--gpu_index", "0", "--config_file", "./DiffPlates/DiffPlates.cfg", "--weights", "./DiffPlates/DiffPlates_best.weights", "--data_file", "./DiffPlates/DiffPlates.data"]
+    args = ["--gpu_index", "0", "--config_file", "./plate_model/DiffPlates/DiffPlates.cfg", "--weights", "./plate_model/DiffPlates/DiffPlates_best.weights", "--data_file", "./plate_model/DiffPlates/DiffPlates.data"]
 else:
     raise ValueError("Pipeline does not exist")
 

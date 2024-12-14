@@ -3,7 +3,7 @@ import random
 import os
 import cv2
 import time
-import darknet
+import plate_model.darknet as darknet
 import argparse
 import sys
 from datetime import datetime

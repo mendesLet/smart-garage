@@ -5,13 +5,13 @@ import random
 import os
 import cv2
 import time
-import darknet
+import plate_model.darknet as darknet
 import argparse
 import sys
 from datetime import datetime
 import re
 import easyocr
-from utils import *
+from plate_model.utils import *
 
 # Global variables for speed control
 frame_delay = 30  # Delay in milliseconds (default is 30 for normal speed)

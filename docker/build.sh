@@ -14,7 +14,7 @@ RRE="${NORM}${OFF}"
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 IMAGE_NAME="iot/smart-garage"
-IMAGE_TAG="desktop"
+IMAGE_TAG="raspi"
 
 if docker images --format '{{.Repository}}:{{.Tag}}' | grep -q "$IMAGE_NAME:$IMAGE_TAG"; then
     echo -e "${BOLD}Image ${BLU}${BOLD}$IMAGE_NAME${OFF} ${BOLD}with tag ${BLU}${BOLD}$IMAGE_TAG${OFF} ${BOLD}already exists.${RRE}"

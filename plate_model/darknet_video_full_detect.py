@@ -6,11 +6,11 @@ import random
 import os
 import cv2
 import time
-import darknet
+import plate_model.darknet as darknet
 import argparse
 import sys
 from datetime import datetime
-from utils import *
+from plate_model.utils import *
 
 # Global variables for speed control
 frame_delay = 30  # Delay in milliseconds (default is 30 for normal speed)
@@ -40,7 +40,9 @@ def check_arguments_errors(args):
     if str2int(args.input) == str and not os.path.exists(args.input):
         raise(ValueError("Invalid video path {}".format(os.path.abspath(args.input))))
 
-def video_capture_full(confidence_threshold, required_consecutive_detections):
+def video_capture_full(
+    cap, confidence_threshold, required_consecutive_detections, network, class_names, darknet_width, darknet_height, class_colors, args
+):
     global frame_delay
     consecutive_count = 0
     reference_classes = None
@@ -68,10 +70,11 @@ def video_capture_full(confidence_threshold, required_consecutive_detections):
         darknet.copy_image_from_bytes(img_for_detect, frame_resized.tobytes())
 
         # Perform inference and drawing
-        detections = darknet.detect_image(network, class_names, img_for_detect, thresh=args.thresh)
+        detections = darknet.detect_image(network, class_names, img_for_detect, thresh=args["thresh"])
 
         end = time.time()  # End time for FPS calculation
         fps_label = f"FPS: {round(1.0 / (end - start), 2)}"
+        print(fps_label)
 
         detections_adjusted = []
         if frame is not None:
@@ -150,7 +153,7 @@ def video_capture_full(confidence_threshold, required_consecutive_detections):
                             chosen_label = p_lbl
                             chosen_bbox = p_bbox
 
-                    # print(f"{required_consecutive_detections} consecutive detections with confidence >= {confidence_threshold}%")
+                    print(f"{required_consecutive_detections} consecutive detections with confidence >= {confidence_threshold}%")
                     # print("Bounding Box Coordinates:", chosen_bbox)
 
                     consecutive_count = 0
@@ -188,14 +191,14 @@ def video_capture_full(confidence_threshold, required_consecutive_detections):
             cv2.putText(image, fps_label, (0, 25), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 0), 5)
             cv2.putText(image, fps_label, (0, 25), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 3)
 
-            if not args.dont_show:
+            if not args["dont_show"]:
                 cv2.imshow('Inference', image)
 
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 return None
 
             # Write the frame to the output video file if specified
-            if args.out_filename is not None:
+            if args["out_filename"] is not None:
                 video.write(image)  # Save the frame to video file
         
         # Free Darknet image after inference
